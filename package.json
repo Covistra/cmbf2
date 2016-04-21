@@ -1,0 +1,38 @@
+{
+  "name": "cmbf2-core",
+  "version": "0.1.0",
+  "description": "Core API for the CMBF/2 micro-service framework. All micro-services project should import it",
+  "main": "src/index.js",
+  "scripts": {
+    "preinstall": "npm install cmbf2-core",
+    "prepublish": "./node_modules/.bin/gulp publish",
+    "test": "./node_modules/.bin/gulp unit",
+    "postinstall": "tsd reinstall"
+  },
+  "author": "Joel Grenon",
+  "license": "Apache V2",
+  "typescript": {
+    "definition": "index.d.ts"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "del": "^2.2.0",
+    "gulp": "^3.9.1",
+    "gulp-debug": "^2.1.2",
+    "gulp-inject": "^4.0.0",
+    "gulp-mocha": "^2.2.0",
+    "gulp-nodemon": "^2.0.6",
+    "gulp-rimraf": "^0.2.0",
+    "gulp-sourcemaps": "^2.0.0-alpha",
+    "gulp-tslint": "^4.3.5",
+    "gulp-typescript": "^2.13.0",
+    "sinon": "^1.17.3",
+    "tslint": "^3.7.4",
+    "typescript": "^1.8.10"
+  },
+  "dependencies": {
+    "bluebird": "^3.3.5",
+    "joi": "^8.0.5",
+    "websocket": "^1.0.22"
+  }
+}
