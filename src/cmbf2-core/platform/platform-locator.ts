@@ -27,18 +27,19 @@ export class PlatformLocator {
     static connect(cfg?: PlatformLocatorOptions) : P<Platform> {
         cfg = cfg || {protocol: PlatformProtocols.STREAM, secure: false, host: 'localhost', port: 25025, version: 1 };
 
-        return new P<Platform>((resolve, reject) => {
+        return new P<Platform>((resolve) => {
             var impl = null;
 
             switch(cfg.protocol) {
                 case PlatformProtocols.HTTP:
                     impl = new HttpPlatformClient(cfg.host, cfg.port, { secure: cfg.secure, version: cfg.version });
                     break;
-                case PlatformProtocols.STREAM:
-                    impl = new StreamPlatformClient(cfg.host, cfg.port, { secure: cfg.secure, version: cfg.version });
-                    break;
                 case PlatformProtocols.MESSAGING:
                     impl = new MessagingPlatformClient(cfg.host, cfg.port, { secure: cfg.secure, version: cfg.version });
+                    break;
+                case PlatformProtocols.STREAM:
+                default:
+                    impl = new StreamPlatformClient(cfg.host, cfg.port, { secure: cfg.secure, version: cfg.version });
                     break;
             }
 

@@ -3,7 +3,7 @@ import {Logger} from "./logger";
 import * as bunyan from "bunyan";
 import {PlatformStream} from "./platform-stream";
 
-export class CentralLogger implements Logger {
+class CentralLogger implements Logger {
     private root : bunyan.Logger;
     private platformStream: PlatformStream;
 
@@ -47,4 +47,10 @@ export class CentralLogger implements Logger {
         return this.root.child(opts);
     }
 
+}
+
+const rootLogger = new CentralLogger();
+
+export function root(): Logger {
+    return rootLogger;
 }

@@ -1,4 +1,3 @@
-
 import {Platform} from "../platform";
 import {CapabilityQuery} from "../capability-query";
 import {ServiceProxy} from "../service-proxy";
