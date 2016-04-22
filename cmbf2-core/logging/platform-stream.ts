@@ -26,6 +26,7 @@ export class PlatformStream extends Writable {
             return platform;
         });
 
+        console.log("Platform was initialized");
     }
 
     _write(chunk: any, encoding: string, next) {

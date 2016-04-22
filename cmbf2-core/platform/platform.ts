@@ -5,7 +5,7 @@ import {ServiceProxy} from "./service-proxy";
 import * as P from "bluebird";
 
 export interface Platform {
-
+    
     resolveService(query: CapabilityQuery ): P<ServiceProxy>;
 
     /**

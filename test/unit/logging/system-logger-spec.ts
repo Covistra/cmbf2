@@ -2,13 +2,12 @@
 
 import {expect} from "chai";
 
-import * as SystemLogger from '../../../src/cmbf2-core/logging/central-logger';
+import {SystemLogger} from '../../../cmbf2-core/logging/system-logger';
 
-describe('CentralLogger', () => {
+describe('SystemLogger', () => {
 
     it('should create underlying bunyan logger', () => {
-        var logger = SystemLogger.root();
-        console.dir(logger);
+        var logger = SystemLogger.get();
         expect(logger).not.to.be.undefined;
     });
 

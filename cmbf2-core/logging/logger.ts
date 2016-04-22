@@ -11,5 +11,4 @@ export interface Logger {
     error(...args: any[]): void;
     fatal(...args: any[]): void;
 
-    child(opts?: any) : Logger;
 }

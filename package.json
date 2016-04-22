@@ -2,18 +2,13 @@
   "name": "cmbf2-core",
   "version": "0.1.2-pre",
   "description": "Core API for the CMBF/2 micro-service framework. All micro-services project should import it",
-  "main": "dist/src/cmbf2-core.js",
+  "main": "dist/cmbf2-core.js",
   "scripts": {
-    "preinstall": "npm install autodts",
-    "postinstall": "autodts link",
-    "prepublish": "gulp && autodts generate",
     "test": "gulp unit"
   },
   "author": "Joel Grenon",
   "license": "Apache V2",
-  "typescript": {
-    "definition": "./dist/src/index.d.ts"
-  },
+  "typings": "./dist/cmbf2-core.d.ts",
   "devDependencies": {
     "chai": "^3.5.0",
     "del": "^2.2.0",
@@ -32,7 +27,8 @@
   },
   "dependencies": {
     "bluebird": "^3.3.5",
-    "in-publish": "^2.0.0",
+    "bunyan": "^1.8.1",
+    "bunyan-format": "^0.2.1",
     "joi": "^8.0.5",
     "websocket": "^1.0.22"
   }

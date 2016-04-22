@@ -6,7 +6,7 @@ import * as P from "bluebird";
 import {ServiceRequest} from "../service-request";
 import {client as Client} from "websocket";
 import {Logger} from "../../logging/logger";
-import * as SystemLogger from "../../logging/central-logger";
+import {SystemLogger} from "../../logging/system-logger";
 import {PromiseUtils} from '../../util/promise-utils';
 
 export interface StreamPlatformOptions {
@@ -28,7 +28,11 @@ export class StreamPlatformClient implements Platform {
         this.host = host;
         this.port = port;
         this.options = options || { secure: false, version: 1 };
-        this.logger = SystemLogger.root().child({client: 'stream' });
+
+    }
+
+    initialize() {
+        this.logger = SystemLogger.get();
 
         // Create the web socket
         this.socket = new Client();
@@ -43,6 +47,7 @@ export class StreamPlatformClient implements Platform {
         });
 
         this.socket.on('connect', (conn: any) => {
+            this.logger.debug("Connected to stream");
             this.connResolver(conn);
         });
     }

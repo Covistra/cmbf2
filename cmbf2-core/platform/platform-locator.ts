@@ -28,7 +28,7 @@ export class PlatformLocator {
         cfg = cfg || {protocol: PlatformProtocols.STREAM, secure: false, host: 'localhost', port: 25025, version: 1 };
 
         return new P<Platform>((resolve) => {
-            var impl = null;
+            let impl : Platform = null;
 
             switch(cfg.protocol) {
                 case PlatformProtocols.HTTP:
@@ -39,7 +39,11 @@ export class PlatformLocator {
                     break;
                 case PlatformProtocols.STREAM:
                 default:
-                    impl = new StreamPlatformClient(cfg.host, cfg.port, { secure: cfg.secure, version: cfg.version });
+                    var client = impl = new StreamPlatformClient(cfg.host, cfg.port, { secure: cfg.secure, version: cfg.version });
+                    process.nextTick(function() {
+                        console.log("Initialize stream platform...");
+                        client.initialize();
+                    });
                     break;
             }
 
