@@ -3,8 +3,8 @@ import {Logger} from "./logger";
 import * as bunyan from "bunyan";
 import {PlatformStream} from "./platform-stream";
 
-class CentralLogger implements Logger {
-    private root : bunyan.Logger;
+export class CentralLogger implements Logger {
+    private root : any;
     private platformStream: PlatformStream;
 
     constructor(cfg?: any) {
@@ -13,6 +13,7 @@ class CentralLogger implements Logger {
         this.root = bunyan.createLogger({
             name: 'system',
             streams: [{
+                type: 'stream',
                 level: cfg.level || 'info',
                 stream: this.platformStream
             }]
@@ -42,15 +43,5 @@ class CentralLogger implements Logger {
     fatal() {
         return this.root.fatal.apply(this.root, arguments);
     }
-
-    child(opts:any) {
-        return this.root.child(opts);
-    }
-
-}
-
-const rootLogger = new CentralLogger();
-
-export function root(): Logger {
-    return rootLogger;
+    
 }

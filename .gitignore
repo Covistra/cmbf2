@@ -1,3 +1,5 @@
 node_modules
 dist
 typings
+index.d.ts
+index.ref.d.ts
