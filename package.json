@@ -1,6 +1,6 @@
 {
   "name": "cmbf2-core",
-  "version": "0.1.2",
+  "version": "0.1.3-pre",
   "description": "Core API for the CMBF/2 micro-service framework. All micro-services project should import it",
   "main": "dist/cmbf2-core.js",
   "scripts": {
