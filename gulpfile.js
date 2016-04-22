@@ -10,6 +10,7 @@ var gulp = require('gulp'),
     nodemon = require('gulp-nodemon'),
     Config = require('./gulp.config'),
     mocha = require('gulp-mocha'),
+    typedoc = require('gulp-typedoc'),
     tsProject = tsc.createProject('tsconfig.json'),
     unitProject = tsc.createProject('tsconfig.json');
 
@@ -43,8 +44,7 @@ gulp.task('compile-ts', function () {
  * Compile TypeScript and include references to library and app .d.ts files.
  */
 gulp.task('compile-tests-ts', function () {
-    var sourceTsFiles = [config.allTestsSource,                //path to typescript files
-        config.libraryTypeScriptDefinitions]; //reference to library .d.ts files
+    var sourceTsFiles = [config.allTestsSource].concat(config.libraryTypeScriptDefinitions);
 
     var tsResult = gulp.src(sourceTsFiles)
         .pipe(sourcemaps.init())
@@ -76,6 +76,27 @@ gulp.task('unit', ['ts-lint', 'compile-ts', 'compile-tests-ts'], function() {
     return gulp.src(config.allTests, {read: false})
         .pipe(mocha({reporter: 'nyan'}));
 
+});
+
+gulp.task('doc', ['ts-lint'], function(){
+    return gulp
+        .src(["cmbf2-core/**/*.ts", "./cmbf2-core.ts"])
+        .pipe(typedoc({
+            // TypeScript options (see typescript docs)
+            module: "commonjs",
+            target: "es5",
+            includeDeclarations: true,
+
+            // Output options (see typedoc docs)
+            out: "./doc",
+            json: "./doc/options.json",
+
+            // TypeDoc options (see typedoc docs)
+            name: "cmbf/2",
+            plugins: [],
+            ignoreCompilerErrors: false,
+            version: true
+        }));
 });
 
 gulp.task('publish', ['unit']);

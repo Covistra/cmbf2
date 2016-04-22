@@ -12,7 +12,7 @@ var GulpConfig = (function () {
         this.allTests = this.testPath + "/**/*.js";
 
         this.typings = './typings/';
-        this.libraryTypeScriptDefinitions = this.typings + '/**/*.d.ts';
+        this.libraryTypeScriptDefinitions = [this.typings + '/**/*.d.ts', './vendor/**/*.d.ts'];
     }
     return gulpConfig;
 })();

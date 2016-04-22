@@ -11,3 +11,4 @@ export {Schema} from "./cmbf2-core/platform/schema";
 export {ServiceDescriptor} from "./cmbf2-core/platform/service-descriptor";
 export {ServiceProxy} from "./cmbf2-core/platform/service-proxy";
 export {ServiceRequest} from "./cmbf2-core/platform/service-request";
+export {PromiseUtils} from "./cmbf2-core/util/promise-utils";
