@@ -11,7 +11,7 @@ export interface Platform {
     /**
      * Fire and forget strategy implied
      */
-    send(request: ServiceRequest): P<any>;
+    send(request: ServiceRequest): void;
 
     /**x
      * Promise will be resolved with the result

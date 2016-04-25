@@ -4,4 +4,7 @@ typings
 .idea
 tsd.json
 tsConfig.json
-
+cmbf2-core
+cmbf2-core.ts
+.npmignore
+!dist/cmbf2-core

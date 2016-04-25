@@ -3,6 +3,7 @@ import {PlatformLocator} from "../platform/platform-locator";
 import {Platform} from "../platform/platform";
 import * as P from "bluebird";
 import {ServiceProxy} from "../platform/service-proxy";
+import {LogRequest} from "../platform/requests/log-request";
 
 export class PlatformStream extends Writable {
     private platform: P<Platform>;
@@ -11,39 +12,41 @@ export class PlatformStream extends Writable {
     constructor(cfg: any) {
         super();
 
+        console.log("Instantiating a platform-stream");
+
         // Establish underlying connection to the platform
-        this.platform = PlatformLocator.connect(cfg).then((platform) => {
+        this.logService = PlatformLocator.connect(cfg).then(function(platform) : P<ServiceProxy> {
 
             // Retrieve a logging service matching our needs. For performance,
             // we pre-resolve the service instead of relying on the platform capacity
             // to resolve services based on requests
 
-            this.logService = platform.resolveService({
+            return platform.resolveService({
                 group: 'system:monitor',
                 action: "log"
             });
 
-            return platform;
+        }).catch( (error) => {
+            console.error("Unable to resolve service system:monitor", error);
         });
 
-        console.log("Platform was initialized");
     }
 
     _write(chunk: any, encoding: string, next) {
 
-        // Record log using our logging service
-        this.logService.then((service: ServiceProxy) => {
-            return service.exec({
-                action: 'log',
-                payload: {
-                    data: chunk,
-                    encoding: encoding
-                }
-            });
-        })
-        .then(function(result) {
-            return next(null, result);
-        }).catch(next);
+        if(this.logService) {
+            // Record log using our logging service
+            return this.logService.then((service: ServiceProxy) => {
+                return service.exec(new LogRequest(chunk, encoding));
+            })
+            .then(function(result) {
+                next(null, result);
+                return null;
+            }).catch(next);
+        }
+        else {
+            console.log("OFFLINE: " + chunk.toString('utf8'));
+        }
 
     }
 

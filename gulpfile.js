@@ -99,6 +99,6 @@ gulp.task('doc', ['ts-lint'], function(){
         }));
 });
 
-gulp.task('publish', ['unit']);
 
+gulp.task('publish', ['unit']);
 gulp.task('default', ['ts-lint', 'compile-ts']);

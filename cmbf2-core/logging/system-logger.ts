@@ -6,7 +6,7 @@ export class SystemLogger {
 
     static get() {
         if(!this.logger) {
-            this.logger = new CentralLogger();
+            this.logger = new CentralLogger({host: 'localhost', port: 9050});
         }
         return this.logger;
     }

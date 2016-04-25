@@ -41,7 +41,7 @@ export class PlatformLocator {
                 default:
                     var client = impl = new StreamPlatformClient(cfg.host, cfg.port, { secure: cfg.secure, version: cfg.version });
                     process.nextTick(function() {
-                        console.log("Initialize stream platform...");
+                        console.log("Initialize stream platform...", cfg);
                         client.initialize();
                     });
                     break;

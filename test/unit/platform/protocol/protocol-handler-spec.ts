@@ -2,8 +2,11 @@
 
 import {expect} from "chai";
 import {ProtocolHandler} from "../../../../cmbf2-core/platform/protocol/protocol-handler";
+import {ResolveServiceRequest} from "../../../../cmbf2-core/platform/requests/resolve-service-request";
+import {ServiceRequest} from "../../../../cmbf2-core/platform/service-request";
+import * as System from "../../../../cmbf2-core/platform/system";
 
-describe.only('ProtocolHandler', function() {
+describe('ProtocolHandler', function() {
     let protocolHandler: ProtocolHandler;
 
     beforeEach(function(){
@@ -43,4 +46,21 @@ describe.only('ProtocolHandler', function() {
         expect(msg.plain_date).to.eql(date.toUTCString());
     });
 
+    it('should properly encode and decode a service-request', function() {
+        let req : ServiceRequest = new ResolveServiceRequest({
+            group: 'accounting:receivables',
+            action: 'enquiry',
+            target: 'invoice:late'
+        });
+
+        var buffer = protocolHandler.encode(req);
+
+        var msg = protocolHandler.decode(buffer);
+        expect(msg.group).to.equal("system");
+        expect(msg.payload.group).to.equal("accounting:receivables");
+        expect(msg.action).to.equal(System.Actions.Discover);
+        expect(msg.target).to.equal(System.Schemas.Service);
+        expect(msg.payload.target).to.equal('invoice:late');
+        expect(msg.payload.action).to.equal('enquiry');
+    });
 });

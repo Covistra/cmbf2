@@ -41,6 +41,7 @@
     "bunyan": "^1.8.1",
     "bunyan-format": "^0.2.1",
     "joi": "^8.0.5",
+    "lodash": "^4.11.1",
     "pson": "^2.0.0",
     "websocket": "^1.0.22"
   }

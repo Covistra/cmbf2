@@ -9,6 +9,7 @@ export class CentralLogger implements Logger {
 
     constructor(cfg?: any) {
         cfg = cfg || {};
+        console.log("Configuring logger with platform stream", cfg);
         this.platformStream = new PlatformStream(cfg);
         this.root = bunyan.createLogger({
             name: 'system',

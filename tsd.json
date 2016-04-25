@@ -28,6 +28,9 @@
     },
     "websocket/websocket.d.ts": {
       "commit": "544a35a10866b32afda9c7f029c0764558563f4f"
+    },
+    "lodash/lodash.d.ts": {
+      "commit": "f9c44651705f574f6d4258fe5e1c335462bdcc19"
     }
   }
 }

@@ -11,7 +11,7 @@ export class ProtocolHandler {
     }
 
     encode(message: any) : Buffer {
-        return this.pson.encode(message);
+        return this.pson.encode(message).toBuffer();
     }
 
     decode(buffer: Buffer): any {
