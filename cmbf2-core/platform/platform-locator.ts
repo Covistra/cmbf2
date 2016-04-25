@@ -25,7 +25,7 @@ export class PlatformLocator {
      * @returns {Promise<Platform>|Promise}
      */
     static connect(cfg?: PlatformLocatorOptions) : P<Platform> {
-        cfg = cfg || {protocol: PlatformProtocols.STREAM, secure: false, host: 'localhost', port: 25025, version: 1 };
+        cfg = cfg || {protocol: PlatformProtocols.STREAM, secure: false, host: '127.0.0.1', port: 9050, version: 1 };
 
         return new P<Platform>((resolve) => {
             let impl : Platform = null;
